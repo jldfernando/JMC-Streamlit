@@ -47,7 +47,7 @@ def reset_filters():
 
 ### Main Page -------------------------------------------------------------------------------------
 st.title("JMC Streamlit - Version 1.0 beta")
-st.header('Availability')
+st.header('Availability Heatmap')
 
 with st.expander("Filters"):
     col1, col2 = st.columns([3,1], vertical_alignment='top')
