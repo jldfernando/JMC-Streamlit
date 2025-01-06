@@ -47,7 +47,6 @@ def reset_filters():
 
 ### Main Page -------------------------------------------------------------------------------------
 st.logo('photos/JMC LOGO (White Text).png', size='large')
-st.title("photos/JMC Streamlit - Version 1.0 beta")
 st.header(f'Hi {st.session_state.user}! How are you doing?')
 
 with st.expander("Filters"):

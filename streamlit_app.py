@@ -10,7 +10,8 @@ if "logged_in" not in st.session_state:
 valid_accounts = {
     'Therese': 'ringring',
     'Gabby': 'ringring',
-    'Josh': 'ringring'
+    'Josh': 'ringring',
+    'guest': 'TBA'
 }
 
 ## Dialog
@@ -29,6 +30,7 @@ def show_banner():
 
 ## Login functions
 def login():
+    st.title("JMC Streamlit - Version 1.1 beta")
     show_banner()
     UN = st.text_input('Username')
     PW = st.text_input('Password', type="password")
@@ -43,7 +45,7 @@ def login():
                 writer.writerows([[timestamp,UN, PW, 'Admin']])         
             st.rerun()
             
-        elif PW == 'TBA':
+        elif PW == valid_accounts['guest']:
             st.session_state.logged_in = True
             st.session_state.user = UN
             st.session_state.user_type = 'Guest'
