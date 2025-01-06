@@ -1,7 +1,7 @@
 import streamlit as st
 
 if "banner" not in st.session_state:
-    st.session_state.banner = 'jmc_banner.png'
+    st.session_state.banner = False
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
     
@@ -15,11 +15,20 @@ valid_accounts = {
 @st.dialog('Failed login')
 def invalid():
     st.write('Invalid Username or Password')
+    
+## Fragment
+@st.fragment
+def show_banner():
+    if st.session_state.banner:
+        banner = 'jmc_banner_alt.png'
+    else:
+        banner = 'jmc_banner.png'
+    st.image(banner)
 
 ## Login functions
 def login():
-    with st.container():
-        st.image(st.session_state.banner)
+    
+    show_banner()
     UN = st.text_input('Username')
     PW = st.text_input('Password', type="password")
     if st.button("Log in"):
@@ -34,11 +43,8 @@ def login():
             st.session_state.user_type = 'Guest'
         else:
             invalid()
-            
-    if not st.toggle('Use alt banner'):
-        st.session_state.banner = 'jmc_banner_alt.png'
-    else:
-        st.session_state.banner = 'jmc_banner.png'
+    st.toggle('Use alt banner', key='banner')
+    
         
 
 def logout():
