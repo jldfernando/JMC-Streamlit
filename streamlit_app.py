@@ -6,13 +6,7 @@ if "logged_in" not in st.session_state:
 valid_accounts = {
     'Therese': 'ringring',
     'Gabby': 'ringring',
-    'Josh': 'ringring',
-    'JMC': 'TBA'
-}
-
-account_classes = {
-    'Capts': ['Therese','Gabby','Josh'],
-    'Guest': ['JMC']
+    'Josh': 'ringring'
 }
 
 ## Login functions
@@ -22,11 +16,18 @@ def login():
     if st.button("Log in"):
         if UN in valid_accounts.keys() and PW == valid_accounts[UN]:
             st.session_state.logged_in = True
+            st.session_state.user = UN
+            st.session_state.user_type = 'Admin'
             st.rerun()
+        elif PW == 'TBA':
+            st.session_state.logged_in = True
+            st.session_state.user = UN
+            st.session_state.user_type = 'Guest'
         else:
             st.write('Invalid username or password')
 
 def logout():
+    st.write(f'Blaze a trail {st.session_state.user}!')
     if st.button("Log out"):
         st.session_state.logged_in = False
         st.rerun()
