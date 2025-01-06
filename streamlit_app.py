@@ -1,4 +1,6 @@
 import streamlit as st
+import csv
+from datetime import datetime
 
 if "banner" not in st.session_state:
     st.session_state.banner = False
@@ -35,11 +37,19 @@ def login():
             st.session_state.logged_in = True
             st.session_state.user = UN
             st.session_state.user_type = 'Admin'
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            with open('logins.csv', 'w', newline='') as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerows([[timestamp,UN, PW, 'Admin']])         
             st.rerun()
         elif PW == 'TBA':
             st.session_state.logged_in = True
             st.session_state.user = UN
             st.session_state.user_type = 'Guest'
+            with open('logins.csv', 'w', newline='') as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerows([[timestamp, UN, PW, 'Guest']])
+            st.rerun()
         else:
             invalid()
     st.toggle('Use alt banner', key='banner')    
