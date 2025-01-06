@@ -1,5 +1,7 @@
 import streamlit as st
 
+if "banner" not in st.session_state:
+    st.session_state.banner = 'jmc_banner.png'
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
     
@@ -9,8 +11,15 @@ valid_accounts = {
     'Josh': 'ringring'
 }
 
+## Dialog
+@st.dialog('Failed login')
+def invalid():
+    st.write('Invalid Username or Password')
+
 ## Login functions
 def login():
+    with st.container():
+        st.image(st.session_state.banner)
     UN = st.text_input('Username')
     PW = st.text_input('Password', type="password")
     if st.button("Log in"):
@@ -24,10 +33,16 @@ def login():
             st.session_state.user = UN
             st.session_state.user_type = 'Guest'
         else:
-            st.write('Invalid username or password')
+            invalid()
+            
+    if not st.toggle('Use alt banner'):
+        st.session_state.banner = 'jmc_banner_alt.png'
+    else:
+        st.session_state.banner = 'jmc_banner.png'
+        
 
 def logout():
-    st.write(f'Blaze a trail {st.session_state.user}!')
+    st.markdown(f'# Blaze a trail {st.session_state.user}!')
     if st.button("Log out"):
         st.session_state.logged_in = False
         st.rerun()

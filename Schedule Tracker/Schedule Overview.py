@@ -46,6 +46,7 @@ def reset_filters():
         st.session_state[toggle] = False
 
 ### Main Page -------------------------------------------------------------------------------------
+st.logo('JMC LOGO (White Text).png', size='large')
 st.title("JMC Streamlit - Version 1.0 beta")
 st.header(f'Hi {st.session_state.user}, How are you doing?')
 
@@ -59,5 +60,3 @@ with st.expander("Filters"):
     col2.button('Reset filters :material/restart_alt:', on_click=reset_filters)
 
 st.dataframe(schedule_display, use_container_width=True, height=982)
-st.divider()
-st.write('In Development')
