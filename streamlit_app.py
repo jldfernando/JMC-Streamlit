@@ -30,8 +30,8 @@ def show_banner():
 
 ## Login functions
 def login():
-    st.title("JMC Streamlit - Version 1.1 beta")
     show_banner()
+    st.title("JMC Streamlit - Version 1.1 beta")
     UN = st.text_input('Username')
     PW = st.text_input('Password', type="password")
     if st.button("Log in"):
