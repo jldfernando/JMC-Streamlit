@@ -22,9 +22,9 @@ def invalid():
 @st.fragment
 def show_banner():
     if st.session_state.banner:
-        banner = 'jmc_banner_alt.png'
+        banner = 'photos/jmc_banner_alt.png'
     else:
-        banner = 'jmc_banner.png'
+        banner = 'photos/jmc_banner.png'
     st.image(banner)
 
 ## Login functions
@@ -42,6 +42,7 @@ def login():
                 writer = csv.writer(csvfile)
                 writer.writerows([[timestamp,UN, PW, 'Admin']])         
             st.rerun()
+            
         elif PW == 'TBA':
             st.session_state.logged_in = True
             st.session_state.user = UN
@@ -50,15 +51,16 @@ def login():
                 writer = csv.writer(csvfile)
                 writer.writerows([[timestamp, UN, PW, 'Guest']])
             st.rerun()
+            
         else:
             invalid()
     st.toggle('Use alt banner', key='banner')    
         
 
 def logout():
-    st.logo('JMC LOGO (White Text).png', size='large')
+    st.logo('photos/JMC LOGO (White Text).png', size='large')
     st.markdown(f'# Blaze a trail {st.session_state.user}!')
-    st.image('jmc_team.JPG')
+    st.image('photos/jmc_team.JPG')
     if st.button("Log out"):
         st.session_state.logged_in = False
         st.rerun()

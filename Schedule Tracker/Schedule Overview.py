@@ -46,8 +46,8 @@ def reset_filters():
         st.session_state[toggle] = False
 
 ### Main Page -------------------------------------------------------------------------------------
-st.logo('JMC LOGO (White Text).png', size='large')
-st.title("JMC Streamlit - Version 1.0 beta")
+st.logo('photos/JMC LOGO (White Text).png', size='large')
+st.title("photos/JMC Streamlit - Version 1.0 beta")
 st.header(f'Hi {st.session_state.user}! How are you doing?')
 
 with st.expander("Filters"):
