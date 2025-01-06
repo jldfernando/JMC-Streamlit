@@ -48,7 +48,7 @@ def reset_filters():
 ### Main Page -------------------------------------------------------------------------------------
 st.logo('JMC LOGO (White Text).png', size='large')
 st.title("JMC Streamlit - Version 1.0 beta")
-st.header(f'Hi {st.session_state.user}, How are you doing?')
+st.header(f'Hi {st.session_state.user}! How are you doing?')
 
 with st.expander("Filters"):
     col1, col2 = st.columns([3,1], vertical_alignment='top')

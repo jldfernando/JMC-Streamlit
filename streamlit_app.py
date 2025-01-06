@@ -27,7 +27,6 @@ def show_banner():
 
 ## Login functions
 def login():
-    
     show_banner()
     UN = st.text_input('Username')
     PW = st.text_input('Password', type="password")
@@ -43,8 +42,7 @@ def login():
             st.session_state.user_type = 'Guest'
         else:
             invalid()
-    st.toggle('Use alt banner', key='banner')
-    
+    st.toggle('Use alt banner', key='banner')    
         
 
 def logout():
@@ -59,16 +57,27 @@ logout_page = st.Page(logout, title="Log out", icon=":material/logout:")
 overview = st.Page(
     "Schedule Tracker/Schedule Overview.py", title="Schedule Overview", icon=":material/schedule:", default=True
 )
+scheduling = st.Page(
+    "Schedule Tracker/Scheduling.py", title='Schedule an event', icon=':material/person_check:'
+)
 
 
-## Define Navigation Directory
+## Define Navigation
 if st.session_state.logged_in:
-    pg = st.navigation(
-        {
-            "Account": [logout_page],
-            "Schedule": [overview]
-        }
-    )
+    if st.session_state.user_type == 'Admin':
+        pg = st.navigation(
+            {
+                "Account": [logout_page],
+                "Schedule": [overview, scheduling],
+            }
+        )
+    else:
+        pg = st.navigation(
+            {
+                "Account": [logout_page],
+                "Schedule": [overview]
+            }
+        )
 else:
     pg = st.navigation([login_page])
 
