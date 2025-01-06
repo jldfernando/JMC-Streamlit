@@ -46,7 +46,9 @@ def login():
         
 
 def logout():
+    st.logo('JMC LOGO (White Text).png', size='large')
     st.markdown(f'# Blaze a trail {st.session_state.user}!')
+    st.image('jmc_team.JPG')
     if st.button("Log out"):
         st.session_state.logged_in = False
         st.rerun()
