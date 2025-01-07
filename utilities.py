@@ -18,6 +18,9 @@ jmc_group_filters = {
     '17th Fleet': ['Juliana Bautista', 'Prudence Clemente', 'Ghia Espino', 'Seth Fuentes', 'Carlo Galura']
 }
 all_jmcs = jmc_group_filters['15th Fleet'] + jmc_group_filters ['16th Fleet'] + jmc_group_filters['17th Fleet']
+
+event_options = ['Visit','Tour','Event']
+
 ## FUNCTIONS
 
 # Phased out Function
@@ -157,3 +160,33 @@ def update_total_availability_display(schedule: pd.DataFrame, group_filter, peop
         
     updated_display = uncompress_schedule_total_availablity(schedule, final_filter, show_names)
     return updated_display, total_group
+
+def hours_past_midnight(dt: datetime):
+    hour = dt.hour
+    mins = dt.minute/60
+    return hour+mins
+
+def check_availability(event_type, event_date, event_start, event_end, df: pd.DataFrame):
+    day_index = event_date.weekday()
+    days_of_week = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
+    filter_day = days_of_week[day_index]
+    filter_start = hours_past_midnight(event_start)
+    filter_end = hours_past_midnight(event_end)
+    if filter_start%0.5 != 0:
+        filter_start = filter_start - (filter_start%0.5)
+    if filter_end%0.5 != 0:
+        filter_end = filter_end - (filter_end%0.5)
+    intervals = int(1+(filter_end-filter_start)/0.5)
+    filter_hours = np.linspace(filter_start, filter_end, intervals)
+    
+    filtered_df = df[df['day'] == filter_day]
+    filtered_df = filtered_df[filtered_df['hours'].isin(filter_hours)]
+
+    results_available = filtered_df.groupby('name')['available'].sum()
+    results_cut = results_available.apply(lambda x: (intervals-x)/2)
+    results_cut = results_cut.sort_values()
+    results_df = results_cut.to_frame()
+    results_df.reset_index(inplace=True)
+    results = results_df.groupby('available')['name'].apply(lambda x: ', '.join(x)).reset_index()
+    results.rename(columns={'available':'Cuts (hours)', 'name':'JMCs'}, inplace=True)
+    return results
