@@ -4,7 +4,7 @@ from utilities import *
 
 ### Session State Stuff ---------------------------------------------------------------------------------
 if 'indiv_schedules' not in st.session_state:
-    file = 'schedules.xlsx'
+    file = 'data/schedules.xlsx'
     sheets_to_drop = ['Read Me!','Dashboard']
     st.session_state.indiv_schedules = get_indiv_schedules_dict(file, sheets_to_drop)
 
