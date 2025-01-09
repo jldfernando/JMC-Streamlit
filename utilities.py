@@ -189,4 +189,20 @@ def check_availability(event_type, event_date, event_start, event_end, df: pd.Da
     results_df.reset_index(inplace=True)
     results = results_df.groupby('available')['name'].apply(lambda x: ', '.join(x)).reset_index()
     results.rename(columns={'available':'Cuts (hours)', 'name':'JMCs'}, inplace=True)
+    results.set_index('Cuts (hours)', inplace=True)
     return results
+
+def format_input(event_name, event_type, event_date, event_start, event_end):
+    day = event_date.weekday()
+    date = event_date.strftime("%B %d, %A")
+    start = event_start.strftime("%I:%M %p")
+    end = event_end.strftime("%I:%M %p")
+    duration = f'{start} - {end}'
+    line = '-'*50
+    
+    readback = f'{event_type} Details:\
+        \n {line}\
+        \n\t {event_name}\
+        \n\t Date: {date}\
+        \n\t Duration: {duration}'
+    return readback
