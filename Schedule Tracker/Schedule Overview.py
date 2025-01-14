@@ -57,5 +57,4 @@ with st.expander("Filters"):
     col1.multiselect('People', people, label_visibility='collapsed', placeholder='Select People', key='people_filter', on_change=check_exclude)
     col2.toggle("Exclude", key='exclude', help='changes the filter to exclude the selected names instead (why though?)')
     col2.button('Reset filters :material/restart_alt:', on_click=reset_filters)
-
 st.dataframe(schedule_display, use_container_width=True, height=982)

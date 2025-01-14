@@ -39,10 +39,7 @@ def login():
             st.session_state.logged_in = True
             st.session_state.user = UN
             st.session_state.user_type = 'Admin'
-            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            with open('data/logins.csv', 'w', newline='') as csvfile:
-                writer = csv.writer(csvfile)
-                writer.writerows([[timestamp,UN, PW, 'Admin']])         
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")       
             st.rerun()
             
         elif PW == valid_accounts['guest']:
@@ -50,9 +47,6 @@ def login():
             st.session_state.user = UN
             st.session_state.user_type = 'Guest'
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            with open('data/logins.csv', 'w', newline='') as csvfile:
-                writer = csv.writer(csvfile)
-                writer.writerows([[timestamp, UN, PW, 'Guest']])
             st.rerun()
             
         else:

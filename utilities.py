@@ -206,3 +206,9 @@ def format_input(event_name, event_type, event_date, event_start, event_end):
         \n\t Date: {date}\
         \n\t Duration: {duration}'
     return readback
+
+def update_indiv_display(jmc_name):
+    indiv_df = st.session_state.indiv_schedules[jmc_name]
+    display_df = indiv_df.set_index('TIME')
+    display_df.drop('hours', axis=1, inplace=True)
+    return display_df
