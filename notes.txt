@@ -1,0 +1,19 @@
+Just some Random notes of what updates the streamlit app needs:
+1. A way for CCO to add/remove/modify visits, tours, events
+2. A calendar to display these visits, tours, events
+3. You can select the event on the calendar to assign, reassign, see who is available, and templates
+4. no need for manual schedule availaility inputs
+5. A way for the team to input their schedule and potential absences -- maybe just regular class schedule
+6. A way for capts to easily monitor declared attendance
+7. A way to visualize the visits, tours, events
+8. Approval tracker?
+9. A way to create, & delete accounts
+10. A way to remind JMCs when they have a visit coming
+11. Quick links hub
+
+
+Usertypes:
+Admin - all access
+CCO - add, remove, and modify visits, check visit list, data visualization 
+Capts - assign visits, delete accounts, check data visualization, see upcoming visits
+Team - declare schedule, change password, check visit calendar, check assigned visits
