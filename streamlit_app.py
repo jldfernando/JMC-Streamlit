@@ -71,9 +71,12 @@ overview = st.Page(
 scheduling = st.Page(
     "Schedule Tracker/Scheduling.py", title='Schedule an event', icon=':material/person_check:'
 )
-jmc_cco_initatives = st.Page(
-    'Schedule Tracker/jmc-cco_initiatives.py', title='JMC-CCO Initiatives', icon=':material/partner_exchange:'
+assignments = st.Page(
+    "JMC Work/JMC Assignments.py", title='JMC Assignments', icon=':material/team_dashboard'
 )
+# jmc_cco_initatives = st.Page(
+#     'Schedule Tracker/jmc-cco_initiatives.py', title='JMC-CCO Initiatives', icon=':material/partner_exchange:'
+# )
 
 
 ## Define Navigation
@@ -82,13 +85,17 @@ if st.session_state.logged_in:
         pg = st.navigation(
             {
                 "Account": [logout_page],
-                "Schedule": [overview, scheduling, jmc_cco_initatives],
+                "JMC Work": [assignments]
+                "Schedule": [overview, scheduling
+                            #  ,jmc_cco_initatives
+                             ],
             }
         )
     else:
         pg = st.navigation(
             {
                 "Account": [logout_page],
+                "JMC Work": [assignments],
                 "Schedule": [overview]
             }
         )
