@@ -85,10 +85,10 @@ if st.session_state.logged_in:
         pg = st.navigation(
             {
                 "Account": [logout_page],
-                "JMC Work": [assignments]
+                "JMC Work": [assignments],
                 "Schedule": [overview, scheduling
                             #  ,jmc_cco_initatives
-                             ],
+                             ]
             }
         )
     else:
