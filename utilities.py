@@ -233,4 +233,20 @@ def get_visits(time_filter, jmc_filter):
     visits_df.drop(columns=['JMCs Assigned', 'Zoom', 'Gmeet'], inplace=True)
     visits_df['Date'] = visits_df['Date'].apply(lambda x: x.strftime("%b %d, %Y"))
     return visits_df[['INSTITUTION','Date','Day','Onsite','Online','MT','Module','Fair']]
-        
+
+def get_tours(time_filter, jmc_filter):
+    tours_df = pd.read_csv(r'data/tour_data.csv', index_col=0, parse_dates=['Date'])
+    
+    if time_filter == '1st Sem':
+        tours_df = tours_df[tours_df['Date'].apply(lambda x: x.year) == 2024]
+    elif time_filter == '2nd Sem':
+        tours_df = tours_df[tours_df['Date'].apply(lambda x: x.year) == 2025]
+    
+    if jmc_filter == None:
+        tours_df = tours_df[~tours_df[['Full Name/School/Unit','Date']].duplicated()]
+    else:
+        tours_df = tours_df[tours_df['Assigned JMC'] == jmc_filter]
+    
+    tours_df.drop(columns=['Assigned JMC'], inplace=True)
+    tours_df['Date'] = tours_df['Date'].apply(lambda x: x.strftime("%B %d, %Y"))
+    return tours_df[['Full Name/School/Unit','Date','Day']]

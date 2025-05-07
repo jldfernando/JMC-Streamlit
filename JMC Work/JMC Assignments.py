@@ -14,7 +14,10 @@ else:
     st.session_state.visit_data = get_visits(st.session_state.time_filter, st.session_state.jmc_selected)
     
 if 'tour_data' not in st.session_state:
-    st.session_state.tour_data = None
+    st.session_state.tour_data = get_tours(None, None)
+else:
+    st.session_state.tour_data = get_tours(st.session_state.time_filter, st.session_state.jmc_selected)
+    
     
 if 'event_data' not in st.session_state:
     st.session_state.event_data = None
@@ -37,15 +40,21 @@ dashboard, visits, tours, events = st.tabs(["Dashboard","Visits","Tours","Events
 with dashboard:
     cola, colb, colc = st.columns(3)
     cola.metric('Visits', st.session_state.visit_data.shape[0], border=True)
-    colb.metric('Tours', 6, border=True)
-    colc.metric('Events', 7, border=True)
+    colb.metric('Tours', st.session_state.tour_data.shape[0], border=True)
+    colc.metric('Events', 'N/A', border=True)
+    cold, cole, colf,colg,colh = st.columns(5)
+    cold.metric('MT', st.session_state.visit_data['MT'].sum(), border=True)
+    cole.metric('Modules', st.session_state.visit_data['Module'].sum(), border=True)
+    colf.metric('Fairs', st.session_state.visit_data['Fair'].sum(), border=True)
+    colg.metric('Onsite', st.session_state.visit_data['Onsite'].sum(), border=True)
+    colh.metric('Online', st.session_state.visit_data['Online'].sum(), border=True)
     
 with visits:
     st.dataframe(st.session_state.visit_data, use_container_width=True, hide_index=True)
     
 with tours:
-    st.write('Data Editor')
+    st.dataframe(st.session_state.tour_data, use_container_width=True, hide_index=True)
     # st.data_editor()
     
 with events:
-    st.write('events')
+    st.write('To Be Added')
