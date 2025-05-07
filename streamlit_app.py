@@ -66,13 +66,13 @@ def logout():
 login_page = st.Page(login, title="Log in", icon=":material/login:")
 logout_page = st.Page(logout, title="Log out", icon=":material/logout:")
 overview = st.Page(
-    "Schedule Tracker/Schedule Overview.py", title="Schedule Overview", icon=":material/schedule:", default=True
+    "Schedule Tracker/Schedule Overview.py", title="Schedule Overview", icon=":material/schedule:"
 )
 scheduling = st.Page(
     "Schedule Tracker/Scheduling.py", title='Schedule an event', icon=':material/person_check:'
 )
 assignments = st.Page(
-    "JMC Work/JMC Assignments.py", title='JMC Assignments', icon=':material/team_dashboard'
+    "JMC Work/JMC Assignments.py", title='JMC Assignments', icon=':material/team_dashboard:', default=True
 )
 # jmc_cco_initatives = st.Page(
 #     'Schedule Tracker/jmc-cco_initiatives.py', title='JMC-CCO Initiatives', icon=':material/partner_exchange:'
@@ -95,8 +95,8 @@ if st.session_state.logged_in:
         pg = st.navigation(
             {
                 "Account": [logout_page],
-                "JMC Work": [assignments],
-                "Schedule": [overview]
+                "JMC Work": [assignments]
+                # "Schedule": [overview]
             }
         )
 else:

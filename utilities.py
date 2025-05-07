@@ -212,3 +212,18 @@ def update_indiv_display(jmc_name):
     display_df = indiv_df.set_index('TIME')
     display_df.drop('hours', axis=1, inplace=True)
     return display_df
+
+def get_visits(time_filter, jmc_filter):
+    visits = pd.read_csv(r'data/visit_data.csv', index_col=0, parse_dates=['Date'])
+    
+    if time_filter == '1st Sem':
+        visits = visits[visits['Date'].apply(lambda x: x.year) == 2024]
+    elif time_filter == '2nd Sem':
+        visits = visits[visits['Date'].apply(lambda x: x.year) == 2025]
+    
+    if jmc_filter == None:
+        visits[~visits[['INSTITUTION','Date']].duplicated()]
+    else:
+        visits[visits['JMCs Assigned'] == jmc_filter]
+    return visits
+        
