@@ -43,7 +43,7 @@ with dashboard:
     cola, colb, colc = st.columns(3)
     cola.metric('Visits', st.session_state.visit_data.shape[0], border=True)
     colb.metric('Tours', st.session_state.tour_data.shape[0], border=True)
-    colc.metric('Events', 'N/A', border=True)
+    colc.metric('Events', 'To be Added', border=True)
     cold, cole, colf,colg,colh = st.columns(5)
     cold.metric('MT', st.session_state.visit_data['MT'].sum(), border=True)
     cole.metric('Modules', st.session_state.visit_data['Module'].sum(), border=True)
