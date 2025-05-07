@@ -18,11 +18,13 @@ if 'tour_data' not in st.session_state:
 else:
     st.session_state.tour_data = get_tours(st.session_state.time_filter, st.session_state.jmc_selected)
     
-    
 if 'event_data' not in st.session_state:
     st.session_state.event_data = None
 
-        
+if 'plot_data' not in st.session_state:
+    st.session_state.plot_data = get_plot_data(st.session_state.visit_data, st.session_state.tour_data)
+else:
+    st.session_state.plot_data = get_plot_data(st.session_state.visit_data, st.session_state.tour_data)
 
 # Main Page -------------------------------------------------------------
 st.logo('photos/JMC LOGO (White Text).png', size='large')
@@ -48,12 +50,16 @@ with dashboard:
     colf.metric('Fairs', st.session_state.visit_data['Fair'].sum(), border=True)
     colg.metric('Onsite', st.session_state.visit_data['Onsite'].sum(), border=True)
     colh.metric('Online', st.session_state.visit_data['Online'].sum(), border=True)
+    with st.container(border=True):
+        st.subheader('2024-2025 Visits')
+        st.line_chart(st.session_state.plot_data, color=['#F6BE00', '#A70012'])
+        # st.dataframe(st.session_state.plot_data)
     
 with visits:
-    st.dataframe(st.session_state.visit_data, use_container_width=True, hide_index=True)
+    st.dataframe(st.session_state.visit_data[st.session_state.visit_data.columns[:-1]], use_container_width=True, hide_index=True)
     
 with tours:
-    st.dataframe(st.session_state.tour_data, use_container_width=True, hide_index=True)
+    st.dataframe(st.session_state.tour_data[st.session_state.tour_data.columns[:-1]], use_container_width=True, hide_index=True)
     # st.data_editor()
     
 with events:

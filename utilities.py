@@ -231,8 +231,8 @@ def get_visits(time_filter, jmc_filter):
         visits_df = visits_df[visits_df['JMCs Assigned'] == jmc_filter]
     
     visits_df.drop(columns=['JMCs Assigned', 'Zoom', 'Gmeet'], inplace=True)
-    visits_df['Date'] = visits_df['Date'].apply(lambda x: x.strftime("%b %d, %Y"))
-    return visits_df[['INSTITUTION','Date','Day','Onsite','Online','MT','Module','Fair']]
+    visits_df['Visit Date'] = visits_df['Date'].apply(lambda x: x.strftime("%b %d, %Y"))
+    return visits_df[['INSTITUTION','Visit Date','Day','Onsite','Online','MT','Module','Fair', 'Date']]
 
 def get_tours(time_filter, jmc_filter):
     tours_df = pd.read_csv(r'data/tour_data.csv', index_col=0, parse_dates=['Date'])
@@ -248,5 +248,14 @@ def get_tours(time_filter, jmc_filter):
         tours_df = tours_df[tours_df['Assigned JMC'] == jmc_filter]
     
     tours_df.drop(columns=['Assigned JMC'], inplace=True)
-    tours_df['Date'] = tours_df['Date'].apply(lambda x: x.strftime("%B %d, %Y"))
-    return tours_df[['Full Name/School/Unit','Date','Day']]
+    tours_df['Tour Date'] = tours_df['Date'].apply(lambda x: x.strftime("%B %d, %Y"))
+    return tours_df[['Full Name/School/Unit','Tour Date','Day', 'Date']]
+
+def get_plot_data(data1, data2):
+    df1 = data1.groupby('Date').size().sort_index().cumsum()
+    df2 = data2.groupby('Date').size().sort_index().cumsum()
+    data = pd.concat([df1, df2], axis=1)
+    data.columns = ['Visits','Tours']
+    data.ffill(inplace=True)
+    return data
+    
