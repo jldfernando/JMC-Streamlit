@@ -1,6 +1,6 @@
 import streamlit as st
-import csv
 from datetime import datetime
+from utilities import *
 
 if "banner" not in st.session_state:
     st.session_state.banner = False
@@ -42,7 +42,7 @@ def login():
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")       
             st.rerun()
             
-        elif PW == valid_accounts['guest']:
+        elif UN in jmc_filters and PW == valid_accounts['guest']:
             st.session_state.logged_in = True
             st.session_state.user = UN
             st.session_state.user_type = 'Guest'
