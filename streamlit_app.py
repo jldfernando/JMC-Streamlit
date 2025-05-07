@@ -11,6 +11,7 @@ valid_accounts = {
     'Therese': 'ringring',
     'Gabby': 'ringring',
     'Josh': 'ringring',
+    'JB': 'jmctba'
     'guest': 'TBA'
 }
 
