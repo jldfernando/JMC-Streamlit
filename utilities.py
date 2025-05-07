@@ -21,7 +21,8 @@ all_jmcs = jmc_group_filters['15th Fleet'] + jmc_group_filters ['16th Fleet'] + 
 jmc_filters = ['Eara Cayañga','Erika Jarder','Andie Miranda','Angel Nicole','Dani Peralta','Margaux Perez','Therese Reyes',
                'MJ Abeleda','Coco Ballonado','Gabby Castillo','Matthew Caudal','EJ De Lima','Josh Fernando',
                'Theresa Imperial','JC Legaspi','Princess Mangubat','Marcus Tornea',
-               'Juliana Bautista', 'Prudence Clemente', 'Ghia Espino', 'Seth Fuentes', 'Carlo Galura']
+               'Juliana Bautista', 'Prudence Clemente', 'Ghia Espino', 'Seth Fuentes', 'Carlo Galura',
+               'JB Lim', 'Jesca Canto']
 
 event_options = ['Visit','Tour','Event']
 

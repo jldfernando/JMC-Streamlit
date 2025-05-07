@@ -71,8 +71,11 @@ overview = st.Page(
 scheduling = st.Page(
     "Schedule Tracker/Scheduling.py", title='Schedule an event', icon=':material/person_check:'
 )
-assignments = st.Page(
+assignments_admin = st.Page(
     "JMC Work/JMC Assignments.py", title='JMC Assignments', icon=':material/team_dashboard:', default=True
+)
+assignments_guest = st.Page(
+    "JMC Work/JMC Assignments team.py", title='JMC Assignments', icon=':material/team_dashboard:', default=True
 )
 # jmc_cco_initatives = st.Page(
 #     'Schedule Tracker/jmc-cco_initiatives.py', title='JMC-CCO Initiatives', icon=':material/partner_exchange:'
@@ -85,7 +88,7 @@ if st.session_state.logged_in:
         pg = st.navigation(
             {
                 "Account": [logout_page],
-                "JMC Work": [assignments],
+                "JMC Work": [assignments_admin],
                 "Schedule": [overview, scheduling
                             #  ,jmc_cco_initatives
                              ]
@@ -95,7 +98,7 @@ if st.session_state.logged_in:
         pg = st.navigation(
             {
                 "Account": [logout_page],
-                "JMC Work": [assignments]
+                "JMC Work": [assignments_guest]
                 # "Schedule": [overview]
             }
         )
