@@ -18,6 +18,10 @@ jmc_group_filters = {
     '17th Fleet': ['Juliana Bautista', 'Prudence Clemente', 'Ghia Espino', 'Seth Fuentes', 'Carlo Galura']
 }
 all_jmcs = jmc_group_filters['15th Fleet'] + jmc_group_filters ['16th Fleet'] + jmc_group_filters['17th Fleet']
+jmc_filters = ['Eara Cayañga','Erika Jarder','Andie Miranda','Angel Nicole','Dani Peralta','Margaux Perez','Therese Reyes',
+               'MJ Abeleda','Coco Ballonado','Gabby Castillo','Matthew Caudal','EJ De Lima','Josh Fernando',
+               'Theresa Imperial','JC Legaspi','Princess Mangubat','Marcus Tornea',
+               'Juliana Bautista', 'Prudence Clemente', 'Ghia Espino', 'Seth Fuentes', 'Carlo Galura']
 
 event_options = ['Visit','Tour','Event']
 
@@ -214,16 +218,19 @@ def update_indiv_display(jmc_name):
     return display_df
 
 def get_visits(time_filter, jmc_filter):
-    visits = pd.read_csv(r'data/visit_data.csv', index_col=0, parse_dates=['Date'])
+    visits_df = pd.read_csv(r'data/visit_data.csv', index_col=0, parse_dates=['Date'])
     
     if time_filter == '1st Sem':
-        visits = visits[visits['Date'].apply(lambda x: x.year) == 2024]
+        visits_df = visits_df[visits_df['Date'].apply(lambda x: x.year) == 2024]
     elif time_filter == '2nd Sem':
-        visits = visits[visits['Date'].apply(lambda x: x.year) == 2025]
+        visits_df = visits_df[visits_df['Date'].apply(lambda x: x.year) == 2025]
     
     if jmc_filter == None:
-        visits[~visits[['INSTITUTION','Date']].duplicated()]
+        visits_df = visits_df[~visits_df[['INSTITUTION','Date']].duplicated()]
     else:
-        visits[visits['JMCs Assigned'] == jmc_filter]
-    return visits
+        visits_df = visits_df[visits_df['JMCs Assigned'] == jmc_filter]
+    
+    visits_df.drop(columns=['JMCs Assigned', 'Zoom', 'Gmeet'], inplace=True)
+    visits_df['Date'] = visits_df['Date'].apply(lambda x: x.strftime("%b %d, %Y"))
+    return visits_df[['INSTITUTION','Date','Day','Onsite','Online','MT','Module','Fair']]
         
